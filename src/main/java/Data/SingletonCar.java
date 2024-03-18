@@ -2,23 +2,31 @@ package Data;
 
 public class SingletonCar {
     private static SingletonCar instance;
-    private CarData carData = new CarData();
-
+//    private CarData carData = new CarData();
+    private Car pCar;
     private SingletonCar() {
     }
 
-    public CarData getCarData() {
-        return carData;
+    public Car getCarData() {
+        return pCar;
     }
 
-    public void setCarData(CarData carData) {
-        this.carData = carData;
+    public void setCarData(Car pCar) {
+        this.pCar = pCar;
     }
 
-    public static SingletonCar getInstance() {
+    public static SingletonCar getInstance(String vehicleType, String brand, String model, int rentDuration) {
         if (instance == null) {
             instance = new SingletonCar();
         }
+
+        if(vehicleType.equals("Hybrid"))
+            instance.setCarData(new Hybrid(brand, model, rentDuration));
+        else if(vehicleType.equals("Gas"))
+            instance.setCarData(new Gas(brand, model, rentDuration));
+        else if(vehicleType.equals("EV"))
+            instance.setCarData(new EV(brand, model, rentDuration));
+
         return instance;
     }
 }
