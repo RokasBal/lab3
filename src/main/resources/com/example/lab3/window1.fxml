@@ -4,13 +4,18 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab3.Window1Controller">
    <children>
       <Button fx:id="sendButton" layoutX="233.0" layoutY="417.0" mnemonicParsing="false" onAction="#rentCar" text="Rent vehicle" />
-      <ChoiceBox fx:id="brandSelection" layoutX="20.0" layoutY="112.0" prefHeight="35.0" prefWidth="256.0" />
-      <ChoiceBox fx:id="modelSelection" layoutX="318.0" layoutY="112.0" prefHeight="35.0" prefWidth="256.0" />
+      <ChoiceBox fx:id="brandSelection" layoutX="23.0" layoutY="124.0" prefHeight="35.0" prefWidth="256.0" />
+      <ChoiceBox fx:id="modelSelection" layoutX="318.0" layoutY="124.0" prefHeight="35.0" prefWidth="256.0" />
       <TextField fx:id="termInput" layoutX="318.0" layoutY="46.0" prefHeight="35.0" prefWidth="256.0" />
       <ChoiceBox fx:id="typeSelection" layoutX="20.0" layoutY="46.0" prefHeight="35.0" prefWidth="256.0" />
+      <Text layoutX="20.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select vehicle type:" />
+      <Text layoutX="318.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter rent duration (days)" />
+      <Text layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select vehicle brand:" />
+      <Text layoutX="318.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select vehicle model:" />
    </children>
 </AnchorPane>

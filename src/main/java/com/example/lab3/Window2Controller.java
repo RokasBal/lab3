@@ -1,10 +1,8 @@
 package com.example.lab3;
 
 import Data.Car;
-import Data.CarData;
 import Data.OutputType;
 import Data.SingletonCar;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,32 +33,16 @@ public class Window2Controller implements Initializable {
 
     @FXML
     private Button sendButton;
-    public Car getCarData() {
-        return pCar;
-    }
-
-    public void setCarData(Car pCar) {
-        this.pCar = pCar;
-        System.out.println("Test message in Window2Controller, l44, " + pCar.getBrand() + " " + pCar.getModel() + " " + pCar.getRentDuration());
-    }
-
-    public void setCar1Data(Car pCar1) {
-        this.pCar1 = pCar;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getData();
     }
 
-    private void setDataUsingAllVariables(ActionEvent actionEvent) {
-        brandLabel.setText(pCar1.getBrand());
-        modelLabel.setText(pCar2.getModel());
-        rentTermLabel.setText(Integer.toString(pCar3.getRentDuration()) + " days");
-    }
-
+    /*
+    * Method, which gets data from Window 1, depending on the chosen way to transfer the data.
+    */
     private void getData() {
-        //        getDataFromStage(new ActionEvent());
         if(OutputType.outputType == 1) {
             // Data gets passed using Window1Controller
             pCar = Window1Controller.getData();
@@ -70,11 +52,11 @@ public class Window2Controller implements Initializable {
             pCar = (Car) Window1Controller.getStage().getUserData();
             setData(new ActionEvent());
         } else if(OutputType.outputType == 3) {
-//             Data gets passed using Singleton
+             // Data gets passed using Singleton
             pCar = SingletonCar.getCarData();
             setData(new ActionEvent());
         } else if(OutputType.outputType == 4) {
-            // Data gets passed using one of each
+            // Data gets passed using one of each requested options
             pCar1 = Window1Controller.getData();
             pCar2 = (Car) Window1Controller.getStage().getUserData();
             pCar3 = SingletonCar.getCarData();
@@ -82,13 +64,28 @@ public class Window2Controller implements Initializable {
         }
     }
 
+    /*
+    * Method, which displays the data when selected displayOption is 1, 2 or 3.
+    */
     @FXML
     void setData(ActionEvent event) {
         brandLabel.setText(pCar.getBrand());
         modelLabel.setText(pCar.getModel());
-        rentTermLabel.setText(Integer.toString(pCar.getRentDuration()) + " days");
+        rentTermLabel.setText(pCar.getRentDuration() + " days");
     }
 
+    /*
+     * Method, which displays the data when selected displayOption is 4.
+     */
+    private void setDataUsingAllVariables(ActionEvent actionEvent) {
+        brandLabel.setText(pCar1.getBrand());
+        modelLabel.setText(pCar2.getModel());
+        rentTermLabel.setText(pCar3.getRentDuration() + " days");
+    }
+
+    /*
+    * Method, which upon the press of the return button, closes current scene and goes back to decision scene (Window 1).
+    */
     @FXML
     void returnToWindow1(ActionEvent event) throws IOException {
         Node node = (Node) event.getSource();
@@ -102,5 +99,17 @@ public class Window2Controller implements Initializable {
         stage.setTitle("Input");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public Car getCarData() {
+        return pCar;
+    }
+
+    public void setCarData(Car pCar) {
+        this.pCar = pCar;
+    }
+
+    public void setCar1Data(Car pCar1) {
+        this.pCar1 = pCar;
     }
 }

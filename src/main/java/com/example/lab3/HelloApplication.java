@@ -7,7 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-// Factory, Proxy, Command
+/*
+* Starting class for car renting JavaFX application.
+* Design patterns utilized: Factory, Proxy and Command.
+* @author Rokas Baliutavičius
+*/
 
 public class HelloApplication extends Application {
     @Override

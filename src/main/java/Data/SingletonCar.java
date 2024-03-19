@@ -1,8 +1,11 @@
 package Data;
 
+/*
+* Class, creating a singleton Car class object.
+*/
+
 public class SingletonCar {
     private static SingletonCar instance;
-//    private CarData carData = new CarData();
     private static Car pCar;
     private SingletonCar() {
     }
@@ -13,7 +16,6 @@ public class SingletonCar {
 
     public void setCarData(Car pCar) {
         this.pCar = pCar;
-        System.out.println("Car data set: " + pCar.getBrand() + " " + pCar.getModel() + " " + pCar.getRentDuration());
     }
 
     public static SingletonCar getInstance(String vehicleType, String brand, String model, int rentDuration) {

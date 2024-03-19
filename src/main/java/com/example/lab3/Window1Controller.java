@@ -61,20 +61,23 @@ public class Window1Controller implements Initializable {
             {"EQC", "EQS"}
     };
 
+    /*
+    * Setting actions for drop down menus and formatting text field to only allow integer input.
+    */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         typeSelection.getItems().addAll(vehicleTypes);
         typeSelection.setOnAction(this::getTypeSelection);
 
-//        brandSelection.getItems().addAll(brands);
         brandSelection.setOnAction(this::getBrandSelection);
 
         InputFormatting.formatToInt(termInput);
         termInput.setOnAction(this::getTermInput);
-
-//        sendButton.setOnAction(this::rentCar);
     }
 
+    /*
+    * Method, which gets user input for vehicle brand selection and adds respective models to model selection drop down menu, based on selected vehicle type.
+    */
     private void getBrandSelection(ActionEvent event) {
         if (Objects.equals(brandSelection.getValue(), "Audi")) {
             modelSelection.getItems().clear();
@@ -103,6 +106,9 @@ public class Window1Controller implements Initializable {
         }
     }
 
+    /*
+    * Method, which gets the user's selection for vehicle type and "resets" brand selection drop down menu.
+    */
     private void getTypeSelection(ActionEvent event) {
         if (Objects.equals(typeSelection.getValue(), "Gas")) {
             vehicleType = "Gas";
@@ -126,8 +132,12 @@ public class Window1Controller implements Initializable {
         rentPeriod = Integer.parseInt(termInput.getText());
     }
 
+    /*
+    * Menthod, responsible for transfering data to the secondary scene, activated upon pressing Rent button.
+    */
     @FXML
     void rentCar(ActionEvent event) throws IOException {
+        // Renting service proxy is created and rent method is called
         RentingProxy rentingProxy = RentingProxy.createProxy("1234");
         rentingProxy.rent();
 
@@ -139,32 +149,20 @@ public class Window1Controller implements Initializable {
         stage.close();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("window2.fxml"));
-        Window2Controller window2Controller = new Window2Controller();
 
         if(OutputType.outputType == 1) {
-            /*
-            * Passing data using controller class
-             */
-            System.out.println("Test message in Window1Controller, l148, " + pCar.getBrand() + " " + pCar.getModel() + " " + pCar.getRentDuration());
-//            window2Controller.setCarData(pCar);
+            // Passing data using Window1Controller
         } else if(OutputType.outputType == 2) {
-            /*
-            * Passing data using stage's UserData
-             */
+            // Passing data using UserData
             stage.setUserData(pCar);
         } else if(OutputType.outputType == 4) {
-//            window2Controller.setCar1Data(pCar);
+            // Passing data using each of the requested options.
             stage.setUserData(pCar);
         }
 
-//        Window2Controller window2Controller = new Window2Controller();
-//        window2Controller.setCarData(pCar);
-//        fxmlLoader.setController(window2Controller);
-
-
         Scene scene = new Scene(fxmlLoader.load());
 
-        stage.setTitle("output");
+        stage.setTitle("Overview");
         stage.setScene(scene);
         stage.show();
     }

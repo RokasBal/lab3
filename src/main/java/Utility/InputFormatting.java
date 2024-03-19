@@ -5,6 +5,10 @@ import javafx.scene.control.TextFormatter;
 
 import java.util.function.UnaryOperator;
 
+/*
+* Class used to format text fields to only accept integer inputs.
+*/
+
 public class InputFormatting {
     public static void formatToInt(TextField textField) {
         textField.setTextFormatter(new TextFormatter<>(new UnaryOperator<TextFormatter.Change>() {

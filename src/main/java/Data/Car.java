@@ -1,5 +1,9 @@
 package Data;
 
+/*
+* Data class used for keeping data related to the rented car.
+*/
+
 public abstract class Car {
     private String brand;
     private String model;
