@@ -4,10 +4,10 @@ public class RentingProxy implements RentingInterface{
 
     private RentingService rentingService;
     private static RentingProxy rentingProxy;
-    private String password;
+    private String password = "1234";
 
     private RentingProxy(String password) {
-        if(password.equals("1234")) {
+        if(password.equals(password)) {
             rentingService = new RentingService();
             System.out.println("Authenticated");
         } else {

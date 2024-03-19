@@ -1,9 +1,12 @@
 package Utility;
 
 public class RentingService implements RentingInterface {
+    private Command rentCommand = new RentCommand(this);
+    private Control controller = new Control();
 
     @Override
     public void rent() {
-        System.out.println("RentingService: Renting a car");
+        controller.setCommand(rentCommand);
+        controller.executeCommand();
     }
 }

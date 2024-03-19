@@ -1,10 +1,8 @@
 package com.example.lab3;
 
-import Data.Car;
-import Data.CarData;
-import Data.DataClass;
-import Data.SingletonCar;
+import Data.*;
 import Utility.InputFormatting;
+import Utility.RentingProxy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class Window1Controller implements Initializable {
 //    private CarData carData;
+    private static Stage stage;
     private Car pCar;
     private String vehicleType;
 
@@ -52,7 +51,7 @@ public class Window1Controller implements Initializable {
 
     private String[][] hybridModels = {
             {"Q5 TFSI e"},
-            {"330e", " 530e", "745e"},
+            {"330e", "530e", "745e"},
             {"E 350e", "GLC 350e"}
     };
 
@@ -129,21 +128,39 @@ public class Window1Controller implements Initializable {
 
     @FXML
     void rentCar(ActionEvent event) throws IOException {
+        RentingProxy rentingProxy = RentingProxy.createProxy("1234");
+        rentingProxy.rent();
+
         SingletonCar singletonCar = SingletonCar.getInstance(vehicleType, brandSelection.getValue(), modelSelection.getValue(), Integer.parseInt(termInput.getText()));
         pCar = singletonCar.getCarData();
-        pCar.setBrand(brandSelection.getValue());
-        pCar.setModel(modelSelection.getValue());
-        pCar.setRentDuration(Integer.parseInt(termInput.getText()));
 
         Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
+        stage = (Stage) node.getScene().getWindow();
         stage.close();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("window2.fxml"));
-
         Window2Controller window2Controller = new Window2Controller();
-        window2Controller.setCarData(pCar);
-        fxmlLoader.setController(window2Controller);
+
+        if(OutputType.outputType == 1) {
+            /*
+            * Passing data using controller class
+             */
+            System.out.println("Test message in Window1Controller, l148, " + pCar.getBrand() + " " + pCar.getModel() + " " + pCar.getRentDuration());
+//            window2Controller.setCarData(pCar);
+        } else if(OutputType.outputType == 2) {
+            /*
+            * Passing data using stage's UserData
+             */
+            stage.setUserData(pCar);
+        } else if(OutputType.outputType == 4) {
+//            window2Controller.setCar1Data(pCar);
+            stage.setUserData(pCar);
+        }
+
+//        Window2Controller window2Controller = new Window2Controller();
+//        window2Controller.setCarData(pCar);
+//        fxmlLoader.setController(window2Controller);
+
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -151,4 +168,13 @@ public class Window1Controller implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static Car getData() {
+        return SingletonCar.getCarData();
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
 }

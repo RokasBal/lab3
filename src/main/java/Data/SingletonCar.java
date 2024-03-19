@@ -3,16 +3,17 @@ package Data;
 public class SingletonCar {
     private static SingletonCar instance;
 //    private CarData carData = new CarData();
-    private Car pCar;
+    private static Car pCar;
     private SingletonCar() {
     }
 
-    public Car getCarData() {
+    public static Car getCarData() {
         return pCar;
     }
 
     public void setCarData(Car pCar) {
         this.pCar = pCar;
+        System.out.println("Car data set: " + pCar.getBrand() + " " + pCar.getModel() + " " + pCar.getRentDuration());
     }
 
     public static SingletonCar getInstance(String vehicleType, String brand, String model, int rentDuration) {
